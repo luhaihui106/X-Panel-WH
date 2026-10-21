@@ -63,7 +63,11 @@
 
 ## 获取与安装
 
-`main` 已集成上游免费 `v26.9.13` 和上述下游改动；**目前没有本派生版正式 GitHub Release 或公开一键安装命令**。请从[固定提交的源码构建说明](docs/build-install-upgrade.md)开始；完整运行还需匹配的 Xray 和数据资产。
+首个完整发行版 **[v26.9.13-wh.1](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.1)** 提供固定 Linux AMD64/ARM64 载荷、真实 Python 安装器、完整源码/许可材料、GeoData 输入和 SHA256SUMS。[中文下载安装、更新与恢复](docs/release-v26.9.13-wh.1.md)。没有 `curl | bash` 一键入口；先下载、核验，再显式执行安装器。
+
+AMD64 已在 Ubuntu 24.04/systemd 255 做隔离新装完整 core 与停启验证；ARM64 有固定包运行验收，但没有等价原生新装 systemd 验收。不承诺所有发行版或 Docker/Windows。默认安装不启动、不自启，首次登录前限制访问并及时修改默认凭据；已有 x-ui/3x-ui 默认拒绝，不能当作无损迁移工具。
+
+载荷构建源码为 `852359bb`，必须搭配 `10829d28` 完整源码/许可 companion 和 GeoData 输入源码；tag 还包含后续发行说明，不冒称重新构建。[第三方声明](THIRD-PARTY-NOTICES.md)及[源码材料公开下载](https://github.com/luhaihui106/X-Panel-WH/releases/download/v26.9.13-wh.1/x-panel-wh-source-materials-10829d28.tar.gz)也应提供给浏览器接收者。
 
 仓库继承的 `install.sh`、`x-ui.sh` 仍包含上游下载/更新和 Pro 分流，**不要将它们当作保留本派生功能的生产升级入口**。升级前备份一致的数据库、配置和程序，先隔离验证；回滚应恢复匹配的旧程序与数据库快照。[安装、升级与回滚](docs/build-install-upgrade.md) · [平台验证与兼容性](docs/compatibility.md)
 

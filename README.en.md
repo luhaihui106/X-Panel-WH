@@ -62,7 +62,11 @@ Quota and expiry still apply independently; monthly reset does not extend validi
 
 ## Getting and installing
 
-`main` integrates upstream free `v26.9.13` and these downstream changes. **No downstream GitHub Release or public one-click installer currently exists.** Start with the [pinned-source build instructions](docs/build-install-upgrade.md); full operation also requires matching Xray and data assets.
+The first complete release, **[v26.9.13-wh.1](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.1)**, supplies fixed Linux AMD64/ARM64 payloads, the actual Python installer, complete source/license materials, GeoData inputs and SHA256SUMS. Follow the [Chinese download/install/update/restore guide](docs/release-v26.9.13-wh.1.md). No curl-to-shell installer is offered. Download, verify, then run explicitly.
+
+AMD64 has isolated Ubuntu 24.04/systemd 255 fresh full-core and stop/start acceptance. ARM64 has fixed-package runtime acceptance, not equivalent native fresh systemd acceptance. No universal distro, Docker or Windows guarantee. Installation does not start/enable the service; restrict access and change initial credentials before exposing it. Existing x-ui/3x-ui installations are refused, not automatically migrated.
+
+Payload build source is `852359bb`; the separate `10829d28` complete source/license companion and GeoData inputs are mandatory. The tag includes later release documentation, not rebuilt payloads. Provide browser recipients with [notices](THIRD-PARTY-NOTICES.md) and the [complete source/material download](https://github.com/luhaihui106/X-Panel-WH/releases/download/v26.9.13-wh.1/x-panel-wh-source-materials-10829d28.tar.gz).
 
 Inherited `install.sh` and `x-ui.sh` still use upstream download/update paths and free/Pro branching. **Do not use them as production upgrades that preserve downstream changes.** Back up consistent databases, configuration and binaries, validate in isolation, and restore matching old binaries/database snapshots for rollback. [Installation and rollback](docs/build-install-upgrade.md) · [Platform evidence and compatibility](docs/compatibility.md)
 
