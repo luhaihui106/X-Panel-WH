@@ -47,6 +47,12 @@ actual modified modular inputs. Do not substitute unrelated qrious 4.0.2.
 
 ## DATA-EVIDENCE: OPEN; bounded history search finished
 
+Superseded for new run81 candidates only: the user approved replacement A.
+See docs/geodata.md and docs/geodata-lock.json for the implemented pinned
+DLC/DB-IP build, labels, attribution and tests. Original historical packages
+and the historical evidence below remain unchanged/unresolved. This does not
+close the independent FRONTEND-NOTICES or GPL-FRONTEND-SOURCE items.
+
 Both original dat hashes remain unchanged. Date-bounded release-branch lookup
 returned no commits; four dated March tags resolve to recipe commit
 b74d235f909125256d8b6d3bfbb8cf55872b8f10, whose dat checksum paths return

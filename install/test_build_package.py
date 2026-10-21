@@ -37,10 +37,11 @@ class BuildPackageTests(unittest.TestCase):
                     output = root / (core + '.tar.gz')
                     args = ['build-package.py', '--arch', 'amd64', '--panel', str(panel),
                             '--panel-sha256', builder.digest(panel.read_bytes()),
-                            '--xray-zip', str(archive), '--version', 'test-amd64', '--output', str(output)]
+                            '--xray-zip', str(archive), '--geodata-dir', str(root),
+                            '--version', 'test-amd64', '--output', str(output)]
                     def git(command, **kwargs):
                         return 'a' * 40 + '\n' if command[1] == 'rev-parse' else source.getvalue()
-                    with patch.object(sys, 'argv', args), patch.object(builder.subprocess, 'check_output', git), patch.object(builder, 'XRAY_SHA256', {'amd64': builder.digest(archive.read_bytes())}):
+                    with patch.object(sys, 'argv', args), patch.object(builder.subprocess, 'check_output', git), patch.object(builder, 'XRAY_SHA256', {'amd64': builder.digest(archive.read_bytes())}), patch.object(builder, 'verified_geodata', return_value={'bin/geoip.dat': b'licensed ip', 'bin/geosite.dat': b'licensed site', 'NOTICE': b'licensed fixture'}):
                         if core == 'amd64':
                             try:
                                 builder.main()
@@ -48,6 +49,10 @@ class BuildPackageTests(unittest.TestCase):
                                 self.fail('builder refused --arch amd64: ' + str(exc))
                             _, manifest = builder.read_package(output, builder.digest(output.read_bytes()))
                             self.assertEqual(manifest['arch'], 'amd64')
+                            files, _ = builder.read_package(output, builder.digest(output.read_bytes()))
+                            self.assertEqual(files['bin/geoip.dat'], b'licensed ip')
+                            self.assertEqual(files['bin/geosite.dat'], b'licensed site')
+                            self.assertIn(b'licensed fixture', files['NOTICE'])
                         else:
                             with self.assertRaises(ValueError):
                                 builder.main()

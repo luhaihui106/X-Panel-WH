@@ -1,0 +1,126 @@
+{
+  "format": 1,
+  "date": "2026-10-21",
+  "assets": {
+    "geoip.dat": "8f6653bef2b3609e4c560d1f2529d7ab25203c81d0c546873914b4e9ff014e76",
+    "geosite.dat": "ef725a08ba804effd5b5b6e747c8c28eabc54ed068d786d7366d067d2e1a3849",
+    "NOTICE": "1dc3d202303765904cc599fc7b22630756d19631a97d6787ed0165fe33f7bc05"
+  },
+  "required_labels": {
+    "geoip.dat": [
+      "br",
+      "cn",
+      "es",
+      "id",
+      "ir",
+      "private",
+      "ru",
+      "tr",
+      "ua",
+      "vn"
+    ],
+    "geosite.dat": [
+      "apple",
+      "category-ads-all",
+      "category-ir",
+      "category-porn",
+      "category-ru",
+      "cn",
+      "google",
+      "meta",
+      "netflix",
+      "openai",
+      "private",
+      "reddit",
+      "speedtest",
+      "spotify"
+    ]
+  },
+  "sources": [
+    {
+      "file": "dlc.tar.gz",
+      "url": "https://codeload.github.com/v2fly/domain-list-community/tar.gz/e8f6d1e5c4a01cda943c0784ffa834340eeab5ae",
+      "sha256": "f27a9e0c12fe6e7f585857b5fcfb412e0c57fdaa803bb20090d0265b203f6552",
+      "bytes": 348277,
+      "retrieved_at": "2026-10-21T19:31:18.212436+00:00",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://render.githubusercontent.com",
+        "content-disposition": "attachment; filename=domain-list-community-e8f6d1e5c4a01cda943c0784ffa834340eeab5ae.tar.gz",
+        "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+        "Content-Type": "application/x-gzip",
+        "cross-origin-resource-policy": "cross-origin",
+        "ETag": "\"f08b9f00c9340ce343bba538efc46aa63617a59cb3f6d11f0a9125ab20167bfb\"",
+        "Strict-Transport-Security": "max-age=31536000",
+        "Vary": "Authorization,Accept-Encoding",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "deny",
+        "X-XSS-Protection": "1; mode=block",
+        "Date": "Wed, 21 Oct 2026 19:31:18 GMT",
+        "Transfer-Encoding": "chunked",
+        "X-GitHub-Request-Id": "DE4A:125CE4:1154:B232:6AD91305",
+        "x-github-edge-region": "koreacentral",
+        "connection": "close"
+      }
+    },
+    {
+      "file": "geoip.tar.gz",
+      "url": "https://codeload.github.com/v2fly/geoip/tar.gz/fd96fbac6cffc06ab9a10d6ee8fad61afe9b771c",
+      "sha256": "b9e16410eb699c69396243c41ebf1c6e55a94898be3363fa0e8dde567a2285cb",
+      "bytes": 26464,
+      "retrieved_at": "2026-10-21T19:31:18.465929+00:00",
+      "headers": {
+        "Access-Control-Allow-Origin": "https://render.githubusercontent.com",
+        "content-disposition": "attachment; filename=geoip-fd96fbac6cffc06ab9a10d6ee8fad61afe9b771c.tar.gz",
+        "Content-Security-Policy": "default-src 'none'; style-src 'unsafe-inline'; sandbox",
+        "Content-Type": "application/x-gzip",
+        "cross-origin-resource-policy": "cross-origin",
+        "ETag": "\"1a0b592b84d78909ae1e8ba736e492de274e57cf93c64675acafdb238cb0f8bb\"",
+        "Strict-Transport-Security": "max-age=31536000",
+        "Vary": "Authorization,Accept-Encoding",
+        "X-Content-Type-Options": "nosniff",
+        "X-Frame-Options": "deny",
+        "X-XSS-Protection": "1; mode=block",
+        "Date": "Wed, 21 Oct 2026 19:31:18 GMT",
+        "Transfer-Encoding": "chunked",
+        "X-GitHub-Request-Id": "DE50:26EED9:10CE:B2B6:6AD91306",
+        "x-github-edge-region": "koreacentral",
+        "connection": "close"
+      }
+    },
+    {
+      "file": "dbip-country-lite-2026-10.mmdb.gz",
+      "url": "https://download.db-ip.com/free/dbip-country-lite-2026-10.mmdb.gz",
+      "error": "HTTP Error 403: Forbidden"
+    }
+  ],
+  "dbip_mirror": {
+    "url": "https://github.com/jcjc-dev/mmdb-latest/releases/download/dbip-latest/dbip-country-lite.mmdb",
+    "sha256": "dbd70ccfa2a13627eaf4913d19920a1a229f1b3c5439ac01c509995b6364202a",
+    "release_metadata": "inputs/mirror-release.json"
+  },
+  "geoip_config": {
+    "input": [
+      {
+        "type": "dbipCountryMMDB",
+        "action": "add",
+        "args": {
+          "uri": "/root/.hermes/cache/scratch/xpanel-launch-20261021/geodata-run81/inputs/dbip-country-lite.mmdb"
+        }
+      },
+      {
+        "type": "private",
+        "action": "add"
+      }
+    ],
+    "output": [
+      {
+        "type": "v2rayGeoIPDat",
+        "action": "output",
+        "args": {
+          "outputDir": "/root/.hermes/cache/scratch/xpanel-launch-20261021/geodata-run81/data",
+          "outputName": "geoip.dat"
+        }
+      }
+    ]
+  }
+}
