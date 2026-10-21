@@ -16,15 +16,15 @@ HERE = Path(__file__).resolve().parent
 SCRIPT = HERE / 'native.py'
 
 
-def elf():
+def elf(arch='arm64'):
     data = bytearray(64)
     data[:6] = b'\x7fELF\x02\x01'
-    struct.pack_into('<HH', data, 16, 2, 183)
+    struct.pack_into('<HH', data, 16, 2, {'arm64': 183, 'amd64': 62}[arch])
     return bytes(data)
 
 
-def package(path, version='test1', extra=None, arch='arm64'):
-    files = {'x-panel': elf(), 'bin/xray-linux-arm64': elf(),
+def package(path, version='test1', extra=None, arch='arm64', panel_arch='arm64', core_arch='arm64'):
+    files = {'x-panel': elf(panel_arch), 'bin/xray-linux-' + arch: elf(core_arch),
              'bin/geoip.dat': b'fixture ip', 'bin/geosite.dat': b'fixture site',
              'LICENSE': b'GPL fixture', 'NOTICE': b'upstream attribution fixture',
              'xray-LICENSE': b'MPL fixture', 'xray-README.md': b'Xray fixture',
@@ -119,6 +119,42 @@ class NativeTests(unittest.TestCase):
         self.sha = package(self.pkg, arch='amd64')
         self.run_cli('install', ok=False)
         self.assertFalse(self.data.exists())
+
+    def test_amd64_package_and_cli_install(self):
+        from unittest.mock import patch
+        module = self.module()
+        self.sha = package(self.pkg, arch='amd64', panel_arch='amd64', core_arch='amd64')
+        try:
+            files, manifest = module.read_package(self.pkg, self.sha)
+        except ValueError as exc:
+            self.fail('valid AMD64 package refused: ' + str(exc))
+        self.assertEqual(manifest['arch'], 'amd64')
+        self.assertIn('bin/xray-linux-amd64', files)
+        args = ['native.py', 'install', '--root', str(self.root),
+                '--package', str(self.pkg), '--sha256', self.sha]
+        with patch.object(module.platform, 'machine', return_value='x86_64'), patch.object(module.sys, 'argv', args):
+            self.assertEqual(module.main(), 0)
+        self.assertEqual((self.data / 'bin/xray-linux-amd64').read_bytes(), elf('amd64'))
+
+    def test_mixed_payload_architectures_refused(self):
+        module = self.module()
+        for arch, panel, core in [('amd64', 'arm64', 'amd64'),
+                                  ('amd64', 'amd64', 'arm64'),
+                                  ('arm64', 'amd64', 'arm64'),
+                                  ('arm64', 'arm64', 'amd64')]:
+            with self.subTest(arch=arch, panel=panel, core=core):
+                self.sha = package(self.pkg, arch=arch, panel_arch=panel, core_arch=core)
+                with self.assertRaises(ValueError):
+                    module.read_package(self.pkg, self.sha)
+
+    def test_valid_package_wrong_host_refused_without_mutation(self):
+        from unittest.mock import patch
+        module = self.module()
+        args = ['native.py', 'install', '--root', str(self.root),
+                '--package', str(self.pkg), '--sha256', self.sha]
+        with patch.object(module.platform, 'machine', return_value='x86_64'), patch.object(module.sys, 'argv', args):
+            self.assertEqual(module.main(), 1)
+        self.assertEqual(list(self.root.iterdir()), [])
 
     def test_archive_negative_shapes(self):
         for name, kind in [('x-panel-wh/x-panel', 'file'), ('../escape', 'file'),

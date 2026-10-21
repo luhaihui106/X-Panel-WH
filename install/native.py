@@ -23,8 +23,9 @@ import tarfile
 import tempfile
 import uuid
 
-FILES = {'x-panel', 'bin/xray-linux-arm64', 'bin/geoip.dat', 'bin/geosite.dat',
+FILES = {'x-panel', 'bin/geoip.dat', 'bin/geosite.dat',
          'LICENSE', 'NOTICE', 'xray-LICENSE', 'xray-README.md', 'source.tar.gz'}
+ARCHES = {'arm64': 183, 'amd64': 62}
 MAX_BYTES = 512 * 1024 * 1024
 UNIT = 'x-panel-wh.service'
 
@@ -44,11 +45,19 @@ def unique_json(data):
     return json.loads(data, object_pairs_hook=pairs)
 
 
-def check_elf(data):
+def check_elf(data, arch='arm64'):
     if (len(data) < 64 or data[:6] != b'\x7fELF\x02\x01' or
-            struct.unpack_from('<H', data, 18)[0] != 183 or
+            arch not in ARCHES or struct.unpack_from('<H', data, 18)[0] != ARCHES[arch] or
             struct.unpack_from('<H', data, 16)[0] not in (2, 3)):
-        raise ValueError('expected Linux ARM64 ELF executable')
+        raise ValueError('expected Linux ' + arch + ' ELF executable')
+
+
+def host_arch():
+    arch = {'aarch64': 'arm64', 'arm64': 'arm64',
+            'x86_64': 'amd64', 'amd64': 'amd64'}.get(platform.machine())
+    if platform.system() != 'Linux' or arch is None:
+        raise ValueError('only Linux ARM64/AMD64 is currently supported')
+    return arch
 
 
 def read_package(path, sha):
@@ -66,7 +75,8 @@ def read_package(path, sha):
         for member in tf:
             if not member.isfile() or member.name in contents:
                 raise ValueError('only unique regular package files allowed')
-            allowed = {'x-panel-wh/' + f for f in FILES | {'manifest.json'}}
+            allowed = {'x-panel-wh/' + f for f in FILES | {'manifest.json'} |
+                       {'bin/xray-linux-' + arch for arch in ARCHES}}
             if member.name not in allowed:
                 raise ValueError('unexpected package member: ' + member.name)
             total += member.size
@@ -76,22 +86,25 @@ def read_package(path, sha):
             if stream is None:
                 raise ValueError('unreadable package file')
             contents[member.name] = stream.read()
-    if set(contents) != {'x-panel-wh/' + f for f in FILES | {'manifest.json'}}:
+    if 'x-panel-wh/manifest.json' not in contents:
         raise ValueError('incomplete package')
     files = {k.removeprefix('x-panel-wh/'): v for k, v in contents.items()}
     manifest = unique_json(files['manifest.json'])
     if (set(manifest) != {'format', 'product', 'version', 'arch', 'source_commit', 'files'} or
             manifest['format'] != 1 or manifest['product'] != 'X-Panel-WH' or
-            manifest['arch'] != 'arm64' or
+            manifest['arch'] not in ARCHES or
             not re.fullmatch(r'[A-Za-z0-9][A-Za-z0-9._-]{0,79}', manifest['version']) or
             not re.fullmatch('[0-9a-f]{40}', manifest['source_commit']) or
-            set(manifest['files']) != FILES):
+            set(manifest['files']) != FILES | {'bin/xray-linux-' + manifest['arch']}):
         raise ValueError('unsupported package manifest')
-    for name in FILES:
+    expected = FILES | {'bin/xray-linux-' + manifest['arch']}
+    if set(files) != expected | {'manifest.json'}:
+        raise ValueError('incomplete or mixed-architecture package')
+    for name in expected:
         if digest(files[name]) != manifest['files'][name]:
             raise ValueError('payload SHA256 mismatch: ' + name)
-    for name in ['x-panel', 'bin/xray-linux-arm64']:
-        check_elf(files[name])
+    for name in ['x-panel', 'bin/xray-linux-' + manifest['arch']]:
+        check_elf(files[name], manifest['arch'])
     return files, manifest
 
 
@@ -181,8 +194,7 @@ class Installer:
             raise ValueError('--root must be an existing absolute real directory')
         if self.offline and self.root.resolve() == Path('/'):
             raise ValueError('--root / is not synthetic; omit it for explicit host installation')
-        if platform.system() != 'Linux' or platform.machine() not in ('aarch64', 'arm64'):
-            raise ValueError('only Linux ARM64 is currently supported')
+        host_arch()
         if not self.offline:
             if os.geteuid() != 0 or not Path('/run/systemd/system').is_dir():
                 raise ValueError('real installation requires root and running systemd')
@@ -403,7 +415,9 @@ def main():
                                     '--proto', '=https', '--proto-redir', '=https', '--tlsv1.2',
                                     '--connect-timeout', '20', '--max-time', '300',
                                     '--max-filesize', str(MAX_BYTES), '-o', str(args.package), args.url], check=True)
-                files, _ = read_package(args.package, args.sha256)
+                files, manifest = read_package(args.package, args.sha256)
+                if manifest['arch'] != host_arch():
+                    raise ValueError('package architecture does not match host')
             elif args.package or args.url or args.sha256:
                 raise ValueError('payload options are only valid for install/update')
             installer = Installer(args)

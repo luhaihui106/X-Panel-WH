@@ -1,6 +1,6 @@
 # X-Panel-WH 最小原生候选交付
 
-当前只支持 Linux ARM64，Python 3.10+、systemd、SQLite（Python 标准库）和 HTTPS 下载时的 curl。面板候选是 Go 1.27.0 linux/arm64 CGO 本机构建，不承诺静态跨发行版兼容。本工具不执行继承的 install.sh/x-ui.sh，不自动查询 latest，不创建公开 URL。
+当前支持 Linux ARM64/AMD64，Python 3.10+、systemd、SQLite（Python 标准库）和 HTTPS 下载时的 curl。面板候选沿用已验证的 CGO 构建，不承诺静态跨发行版兼容。包的两项 ELF 架构必须与 manifest 一致，安装/更新时也必须与主机一致（含 --root 模式）；打包可跨架构且不执行载荷。本工具不执行继承的 install.sh/x-ui.sh，不自动查询 latest，不创建公开 URL。
 
 ## 固定本地包
 
@@ -17,7 +17,7 @@ python3 install/native.py install --package "$PACKAGE" --sha256 "$SHA256"
 - 程序 /usr/local/lib/x-panel-wh/x-panel
 - 服务 /etc/systemd/system/x-panel-wh.service
 - 数据库 /var/lib/x-panel-wh/db/x-ui.db
-- core /var/lib/x-panel-wh/bin/xray-linux-arm64
+- core /var/lib/x-panel-wh/bin/xray-linux-arm64 或 xray-linux-amd64（与包/主机一致）
 - 生成的 core 配置 /var/lib/x-panel-wh/bin/config.json
 - geoip.dat/geosite.dat 同 bin 目录
 - 日志 /var/log/x-panel-wh
@@ -29,7 +29,7 @@ python3 install/native.py install --package "$PACKAGE" --sha256 "$SHA256"
 
 全新独立安装不提供 `/usr/bin/x-ui` 兼容脚本。继承的 Telegram“重启面板”和订阅转换安装仍可能依赖该脚本，在本安装路线当前不可用；本轮不实现兼容脚本。请在主机使用 `systemctl restart x-panel-wh.service` 重启面板，使用 `systemctl status/start/stop x-panel-wh.service` 查看或管理服务；这不替代订阅转换安装功能。
 
-包为严格白名单 x-panel-wh/ 根下常规文件：x-panel、bin/xray-linux-arm64、bin/{geoip,geosite}.dat、LICENSE、NOTICE、xray-LICENSE、xray-README.md、source.tar.gz、manifest.json。拒绝重复、缺失、额外、错误架构、链接、特殊文件和危险路径。外部 --sha256 必填；manifest 再逐文件校验。摘要检测损坏，不等同发布者签名。
+包为严格白名单 x-panel-wh/ 根下常规文件：x-panel、bin/xray-linux-<arm64或amd64>（恰好一项）、bin/{geoip,geosite}.dat、LICENSE、NOTICE、xray-LICENSE、xray-README.md、source.tar.gz、manifest.json。拒绝重复、缺失、额外、混合/错误架构、链接、特殊文件和危险路径。外部 --sha256 必填；manifest 再逐文件校验。摘要检测损坏，不等同发布者签名。
 
 未来公开资产准备好后可用 `--url https://.../固定版本/固定资产.tar.gz --sha256 ...` 替代 --package。只接受显式 HTTPS，curl 开启证书/TLS 校验，重定向也只允许 HTTPS；不允许 latest、查询参数或 URL 凭据。这里没有可用的公开安装下载承诺。
 
@@ -52,7 +52,7 @@ update/restore/uninstall 是显式停服务操作。停服务成功后先保存�
 ## 安全测试与证据层级
 
 ```sh
-TMPDIR=/root/.hermes/cache/scratch PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s install -p test_native.py -v
+TMPDIR=/root/.hermes/cache/scratch PYTHONDONTWRITEBYTECODE=1 python3 -B -m unittest discover -s install -p 'test_*.py' -v
 python3 install/native.py install --root /已有/scratch/synthetic-root --package "$PACKAGE" --sha256 "$SHA256"
 ```
 
@@ -60,7 +60,7 @@ python3 install/native.py install --root /已有/scratch/synthetic-root --packag
 
 ## 生成私人候选
 
-`build-package.py` 只接受已记录摘要的 ARM64 面板，以及固定 Xray v26.3.27 原始 ZIP（内置 ZIP 摘要锁）；不执行面板/core。对应源码用 Git 受跟踪提交归档，排除 .hermes、summary.json、DB、日志和本地证据。必须从已提交且与已验收面板源码一致的提交打包；打包器不声称仅凭调用者提供的摘要即可证明构建来源。
+`build-package.py` 接受已记录摘要的 ARM64/AMD64 面板，以及对应架构固定 Xray v26.3.27 原始 ZIP（各自内置 ZIP 摘要锁）；不执行面板/core。--arch 默认 arm64，AMD64 必须显式 --arch amd64，ZIP 为 Xray-linux-64.zip。对应源码用 Git 受跟踪提交归档，排除 .hermes、summary.json、DB、日志和本地证据。必须从已提交且与已验收面板运行时源码一致的提交打包；仅安装器/文档变更可复用已验收 binary，但必须在交付记录注明 binary 原构建提交、工具链、CGO、vcs.modified 与包源码提交之差，不冒称重新构建。打包器不声称仅凭调用者提供的摘要即可证明构建来源。
 
 ```sh
 python3 -B install/build-package.py --panel /已验收/panel --panel-sha256 完整摘要 --xray-zip /固定/Xray-linux-arm64-v8a.zip --version 本地固定版本 --output /scratch/固定资产.tar.gz
