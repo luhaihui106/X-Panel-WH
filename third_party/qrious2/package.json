@@ -1,0 +1,13 @@
+{
+  "name": "x-panel-wh-qrious2-source-materials",
+  "version": "1.0.0",
+  "private": true,
+  "license": "GPL-3.0-or-later",
+  "scripts": {
+    "build": "node build.cjs",
+    "test": "node test.cjs"
+  },
+  "devDependencies": {
+    "terser": "5.44.0"
+  }
+}

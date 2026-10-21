@@ -38,3 +38,9 @@ panel 为 Go 1.27.0、CGO_ENABLED=1、GOAMD64=v1、GCC 11.4.0 交叉构建，依
 3. qrious2.min.js：有 GPLv3 与 fork 版权头，但实际 fork 的首选修改源码及必要构建材料未在包中证实；补实际对应源码/合规提供方式，不以不同 fork 的链接替代。
 
 这些是具体证据/材料缺口，不是侵权判决，也不要求全部未变上游文件重新授权。保留候选、全部原证据与用户备份；禁止 push/main/公开 Release，公开发布须另获授权并关闭上述具体缺口。
+
+## run80 定点补充（不重打包）
+
+已恢复源码中的 AntD 同名 sidecar，补 39 份完整前端许可正文与实际文件映射；找到字节完全相同的 qrious2 5.1.1 / TaraRostami 精确提交，加入可读 fork、原构建材料和独立可工作的压缩脚本，40 项绘图操作对比通过。所有旧前端运行文件字节保持，面板及已测包未重建，线上未触碰。
+
+上述两项为实质补齐但仍 PARTIAL：修改过的 AntD 内嵌依赖 notice 覆盖尚有小范围缺口；qrious2 原模块源码未包含 fork 修改，不能仅凭可读 dist 和行为对比冒称已证实作者首选源码完整。GeoData 一轮有界历史查询未能证明固定数据的适用来源/条款，停止考古；需用户选择明确许可的新固定数据（MIT DLC + DB-IP-only，覆盖/更新有差异）或首次发行不随附而明确安装。均未擅自替换/删除。详见 [distribution-materials.md](distribution-materials.md) 与 [THIRD-PARTY-NOTICES.md](../THIRD-PARTY-NOTICES.md)。现有 25f94fca 包/source 和 run79 交付目录均不含这些新材料，不称 public ready。

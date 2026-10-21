@@ -1,0 +1,314 @@
+[
+  {
+    "component": "ant-design-vue",
+    "notice_version": "1.7.8",
+    "path": "LICENSES/frontend/ant-design-vue.txt",
+    "sha256": "cd465d7a0c13028e25886e31ae5978383d7e582ba2acd45be5f28699d3b5f476",
+    "source": "frontend/ant-design-vue/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "axios",
+    "notice_version": "1.11.0",
+    "path": "LICENSES/frontend/axios.txt",
+    "sha256": "82761059eaedacb3356803aea8a170d8298609f91b14fc32ee1bfb40d690183c",
+    "source": "frontend/axios/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "vue",
+    "notice_version": "2.7.16",
+    "path": "LICENSES/frontend/vue.txt",
+    "sha256": "17fb24bc303763f3fe1911ee24e5225c7ad59f0e3a5d8123e9b730c100a306a6",
+    "source": "frontend/vue/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "otpauth",
+    "notice_version": "9.4.0",
+    "path": "LICENSES/frontend/otpauth.txt",
+    "sha256": "8f515aab304a561416f03b32a3448bb0e6657a662b024f17fc31a5faf5dfdb7a",
+    "source": "frontend/otpauth/unpacked/package/LICENSE.md",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "@noble/hashes",
+    "notice_version": "1.7.1",
+    "path": "LICENSES/frontend/noble_hashes.txt",
+    "sha256": "4f221aee6e072336700c408c68ab3b96a3fc09f6aebe6f48f1bd99e5ef13faec",
+    "source": "frontend/@noble_hashes/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "urijs",
+    "notice_version": "1.19.11",
+    "path": "LICENSES/frontend/urijs.txt",
+    "sha256": "b5b3bf9d3cf72a31b84dac19028c818e980ac91c2f0384cbe210fd31b9585a5e",
+    "source": "frontend/urijs/unpacked/package/LICENSE.txt",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "codemirror",
+    "notice_version": "5.65.15",
+    "path": "LICENSES/frontend/codemirror.txt",
+    "sha256": "168a4becc968f5001e2ee2e0291b6e4daabafc1894a11ade1e11d56e96096e07",
+    "source": "frontend/codemirror/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "jshint",
+    "notice_version": "2.13.2",
+    "path": "LICENSES/frontend/jshint.txt",
+    "sha256": "ddefbbbf8ebb8e69a66d36848cb613b91b691686fdf4b8a2aec61d496adb59ca",
+    "source": "frontend/jshint/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "moment",
+    "notice_version": "2.30.1",
+    "path": "LICENSES/frontend/moment.txt",
+    "sha256": "8f38f320bbf5eb84c08e08676f7ee1d2204ebe5797f6a090d077329cf212fca3",
+    "source": "frontend/moment/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "moment-jalaali",
+    "notice_version": "0.8.3",
+    "path": "LICENSES/frontend/moment-jalaali.txt",
+    "sha256": "6fde4ed2f189ce494a5e0b1ab4f9af7ac700d1c6d65d929d7540ae542a05b108",
+    "source": "frontend/moment-jalaali/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "jalaali-js",
+    "notice_version": "1.1.0",
+    "path": "LICENSES/frontend/jalaali-js.txt",
+    "sha256": "6f7f18170e01f7913b0aff73d536ba3779cffc37629673a584ffbe00f4ee0a77",
+    "source": "frontend/jalaali-js/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "qs",
+    "notice_version": "6.5.2",
+    "path": "LICENSES/frontend/qs.txt",
+    "sha256": "d2f9d2835eb09ccf673e118e4fdc372075437c1787e66c2202912fbe3e5ee9e1",
+    "source": "frontend/qs/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "vazirmatn",
+    "notice_version": "33.0.3",
+    "path": "LICENSES/frontend/vazirmatn.txt",
+    "sha256": "17e355067c8284f47743a1ee3b1ef7ff684ff0601eda357f9353b10b3016ab31",
+    "source": "frontend/vazirmatn/unpacked/package/OFL.txt",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "classnames",
+    "notice_version": "2.3.2",
+    "path": "LICENSES/frontend/classnames.txt",
+    "sha256": "0c1c24dcc129cb0c02ee9803cfa7a50061c236a3b59b36a714c27f3ade66d7be",
+    "source": "frontend/classnames/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "object-assign",
+    "notice_version": "4.1.1",
+    "path": "LICENSES/frontend/object-assign.txt",
+    "sha256": "6fb9754611c20f6649f68805e8c990e83261f29316e29de9e6cedae607b8634c",
+    "source": "frontend/object-assign/unpacked/package/license",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "punycode",
+    "notice_version": "1.4.0",
+    "path": "LICENSES/frontend/punycode-1.4.0.txt",
+    "sha256": "483acb265f182907d1caf6cff9c16c96f31325ed23792832cc5d8b12d5f88c8a",
+    "source": "frontend/punycode-1.4.0/package/LICENSE-MIT.txt",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "@majidh1/jalalidatepicker",
+    "notice_version": "0.9.4",
+    "path": "LICENSES/frontend/majidh1_jalalidatepicker-0.9.4.txt",
+    "sha256": "62c3b632496d28265aec6df697585418ff8dbf8529f79e3e7bd0786dc0c3bdf0",
+    "source": "frontend/@majidh1_jalalidatepicker-0.9.4/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "lodash",
+    "notice_version": "4.17.21",
+    "path": "LICENSES/frontend/lodash.txt",
+    "sha256": "f71e8ed126b46346494aad5486874cd8f0aafe95092ed67d2e3cb6110f939abc",
+    "source": "frontend/lodash/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "babel-runtime",
+    "notice_version": "6.26.0",
+    "path": "LICENSES/frontend/babel-runtime.txt",
+    "sha256": "f533455c5981c9213689ee68bcc54fb717d8396739781b7e30c344e94323d752",
+    "source": "frontend/babel-runtime/fallback-LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "raf",
+    "notice_version": "3.4.1",
+    "path": "LICENSES/frontend/raf.txt",
+    "sha256": "6b2194e178545b3dcde4a40a09b5f6c00bd9b5b695db0c826c14995c6c9b4ec5",
+    "source": "frontend/raf/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "warning",
+    "notice_version": "4.0.3",
+    "path": "LICENSES/frontend/warning.txt",
+    "sha256": "f657f99d3fb9647db92628e96007aabb46e5f04f33e49999075aab8e250ca7ce",
+    "source": "frontend/warning/unpacked/package/LICENSE.md",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "vue-ref",
+    "notice_version": "2.0.0",
+    "path": "LICENSES/frontend/vue-ref.txt",
+    "sha256": "a1c4beeb9c6f7b4e4b61f87c7b179e9f8ae2bbfd691b19329c8e786bf94ae535",
+    "source": "frontend/vue-ref/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "shallowequal",
+    "notice_version": "1.1.0",
+    "path": "LICENSES/frontend/shallowequal.txt",
+    "sha256": "709e45bb17277819ce27e9abe5dc8e56fe93081e54adb6e6385517f28aa11ac4",
+    "source": "frontend/shallowequal/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "dom-align",
+    "notice_version": "1.12.4",
+    "path": "LICENSES/frontend/dom-align.txt",
+    "sha256": "5d0427088e37071c4b942de990f6365d5c2d195f3e957ce925322d184784e2eb",
+    "source": "frontend/dom-align/unpacked/package/LICENSE.md",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "resize-observer-polyfill",
+    "notice_version": "1.5.1",
+    "path": "LICENSES/frontend/resize-observer-polyfill.txt",
+    "sha256": "49fad6f35ac45600d018ee56051c63e52103820d97d5ad512fe7018ec395b3df",
+    "source": "frontend/resize-observer-polyfill/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "process",
+    "notice_version": "0.11.10",
+    "path": "LICENSES/frontend/process.txt",
+    "sha256": "59a400d04c5078579acc27ddd6452c1bdf763f9506e01364700935fbb1a7c91b",
+    "source": "frontend/process/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "async-validator",
+    "notice_version": "3.5.2",
+    "path": "LICENSES/frontend/async-validator.txt",
+    "sha256": "5d0427088e37071c4b942de990f6365d5c2d195f3e957ce925322d184784e2eb",
+    "source": "frontend/async-validator/unpacked/package/LICENSE.md",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "json2mq",
+    "notice_version": "0.2.0",
+    "path": "LICENSES/frontend/json2mq.txt",
+    "sha256": "95d848d55392bb8239b53cb7a6405bf3914bdab56d1a0d26f3af5f7aced776eb",
+    "source": "frontend/json2mq/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "enquire.js",
+    "notice_version": "2.1.6",
+    "path": "LICENSES/frontend/enquire.js.txt",
+    "sha256": "b7d3c1b8f274c208c2a841b43db4b1ff91d313c93c7a43bb2f84eafa98365091",
+    "source": "frontend/enquire.js/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "add-dom-event-listener",
+    "notice_version": "1.1.0",
+    "path": "LICENSES/frontend/add-dom-event-listener.txt",
+    "sha256": "5d0427088e37071c4b942de990f6365d5c2d195f3e957ce925322d184784e2eb",
+    "source": "frontend/add-dom-event-listener/unpacked/package/LICENSE.md",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "@ant-design/colors",
+    "notice_version": "3.2.2",
+    "path": "LICENSES/frontend/ant-design_colors.txt",
+    "sha256": "5d367fb0a07340571542eb4ee8eb1add62d37b71bad6786a57c2e9a86bf76c70",
+    "source": "frontend/@ant-design_colors/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "shallow-equal",
+    "notice_version": "1.2.1",
+    "path": "LICENSES/frontend/shallow-equal.txt",
+    "sha256": "4f63291fb1f53715b1864e41e3532407457a9b7bc440fb5526e4e5e69540c93e",
+    "source": "frontend/shallow-equal/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "dom-closest",
+    "notice_version": "0.2.0",
+    "path": "LICENSES/frontend/dom-closest.txt",
+    "sha256": "1b2c507e2f54697c5dfef03db90d0a9d408ce92e275a232d13ec9c37168183ad",
+    "source": "frontend/dom-closest/unpacked/package/LICENSE.md",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "performance-now",
+    "notice_version": "2.1.0",
+    "path": "LICENSES/frontend/performance-now.txt",
+    "sha256": "c3af1272f30870168177e888b184c1f802e5081e75a126c794670c0b562d3783",
+    "source": "frontend/performance-now/unpacked/package/license.txt",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "mutationobserver-shim",
+    "notice_version": "0.3.7",
+    "path": "LICENSES/frontend/mutationobserver-shim.txt",
+    "sha256": "3a8890aacc71016df2b35baae36b708f6cd8681565aaf58d861106b666055d40",
+    "source": "frontend/mutationobserver-shim/unpacked/package/license",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "string-convert",
+    "notice_version": "0.2.1",
+    "path": "LICENSES/frontend/string-convert.txt",
+    "sha256": "8e7a0e17a14c91d325c22a8ade50da3aaa5a97e321beebbdce77d63fc719a1c2",
+    "source": "frontend/string-convert/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "dom-matches",
+    "notice_version": "2.0.0",
+    "path": "LICENSES/frontend/dom-matches.txt",
+    "sha256": "1b2c507e2f54697c5dfef03db90d0a9d408ce92e275a232d13ec9c37168183ad",
+    "source": "frontend/dom-matches/unpacked/package/LICENSE.md",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "core-js",
+    "notice_version": "2.6.12",
+    "path": "LICENSES/frontend/core-js.txt",
+    "sha256": "4003e24135fde907d7069bb73aad64092cfe662b26914296f2f7f1e16e1f15a6",
+    "source": "frontend/core-js/unpacked/package/LICENSE",
+    "scope": "Notice input; see asset mapping for runtime identity."
+  },
+  {
+    "component": "jsonlint",
+    "notice_version": "1.6.3",
+    "path": "LICENSES/frontend/jsonlint.txt",
+    "sha256": "a059cbffd5802d1d8a3e54747a0ae443e472f2ea2dfdae824ee66069c896e940",
+    "source": "frontend/jsonlint-1.6.3/package/README.md",
+    "scope": "README MIT section"
+  }
+]
