@@ -334,14 +334,13 @@ class Installer:
         directory = self.checked_snapshot(self.args.backup) if command == 'restore' else None
         self.installed()
         self.stop()
+        backup = None
+        changed = False
         try:
             backup = self.snapshot()
-        except Exception:
-            self.start()
-            raise
-        self.marker.unlink(missing_ok=True)
-        write(self.marker, json.dumps({'operation': command, 'backup': str(backup)}).encode())
-        try:
+            self.marker.unlink(missing_ok=True)
+            write(self.marker, json.dumps({'operation': command, 'backup': str(backup)}).encode())
+            changed = True  # mutation may partially succeed before raising
             if command == 'update':
                 self.deploy(files)
                 self.start()
@@ -354,12 +353,19 @@ class Installer:
                 shutil.rmtree(self.app)
                 self.service('daemon-reload')
             self.marker.unlink()
-        except Exception:
-            # Match program, DB, generated config, core assets and service definition.
-            self.stop()
-            self.replace_from_snapshot(backup)
-            self.start()
-            self.marker.unlink()
+        except Exception as failure:
+            try:
+                if changed:
+                    # Match program, DB, generated config, core assets and service definition.
+                    self.stop()
+                    self.replace_from_snapshot(backup)
+                self.start()
+                if changed:
+                    self.marker.unlink(missing_ok=True)
+                # Before mutation, retain any partial marker/snapshot as failure evidence.
+            except Exception as recovery:
+                raise ValueError(f'{command} failed: {failure!r}; recovery failed: {recovery!r}; '
+                                 f'retain pending/snapshots at {self.data}; backup={backup}') from failure
             raise
         return {'operation': command, 'backup': str(backup), 'offline': self.offline,
                 'data_retained': str(self.data)}

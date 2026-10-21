@@ -206,6 +206,102 @@ class NativeTests(unittest.TestCase):
         self.assertEqual((installer.data / 'bin/config.json').read_text(), 'original config')
         self.assertFalse(installer.marker.exists())
 
+    def test_marker_write_failure_restarts_unchanged_service(self):
+        from unittest.mock import patch
+        self.run_cli('install')
+        self.seed()
+        installer = self.installer()
+        module = self.module()
+        files, _ = module.read_package(self.pkg, self.sha)
+        restore = installer.snapshot()
+        before = [module.tree_manifest(p) for p in
+                  [installer.app, installer.data / 'db', installer.data / 'bin']]
+        real_write = installer.execute.__globals__['write']
+        def fail_marker(path, data, mode=0o600):
+            if path == installer.marker:
+                raise OSError(28, 'injected marker ENOSPC')
+            return real_write(path, data, mode)
+        for command in ['update', 'restore', 'uninstall']:
+            with self.subTest(command=command):
+                installer.args.command = command
+                installer.args.backup = str(restore)
+                with patch.object(installer, 'stop') as stop, patch.object(installer, 'start') as start, patch.dict(installer.execute.__globals__, write=fail_marker):
+                    with self.assertRaisesRegex(OSError, 'marker ENOSPC'):
+                        installer.execute(files)
+                stop.assert_called_once_with()
+                start.assert_called_once_with()
+                self.assertFalse(installer.marker.exists())
+                self.assertEqual(before, [module.tree_manifest(p) for p in
+                    [installer.app, installer.data / 'db', installer.data / 'bin']])
+        self.assertEqual(len(list((installer.data / 'backups').iterdir())), 4)
+
+    def test_pre_mutation_failures_preserve_evidence_and_restart(self):
+        from unittest.mock import patch
+        self.run_cli('install')
+        self.seed()
+        installer = self.installer()
+        module = self.module()
+        files, _ = module.read_package(self.pkg, self.sha)
+        restore = installer.snapshot()
+        real_unlink = Path.unlink
+        real_write = installer.execute.__globals__['write']
+        real_snapshot = installer.snapshot
+        def fail_unlink(path, *args, **kwargs):
+            if path == installer.marker:
+                raise OSError('injected marker unlink failure')
+            return real_unlink(path, *args, **kwargs)
+        def partial_marker(path, data, mode=0o600):
+            if path == installer.marker:
+                real_write(path, b'partial marker')
+                raise OSError('injected partial marker failure')
+            return real_write(path, data, mode)
+        def partial_snapshot():
+            directory = real_snapshot()
+            raise OSError('injected snapshot failure after ' + str(directory))
+        for command in ['update', 'restore', 'uninstall']:
+            for failure in ['snapshot', 'unlink', 'partial-marker']:
+                with self.subTest(command=command, failure=failure):
+                    installer.args.command = command
+                    installer.args.backup = str(restore)
+                    installer.marker.unlink(missing_ok=True)
+                    if failure == 'unlink':
+                        # Only restore accepts a retained pending marker.
+                        if command == 'restore':
+                            installer.marker.write_bytes(b'previous pending')
+                    before = [module.tree_manifest(p) for p in
+                              [installer.app, installer.data / 'db', installer.data / 'bin']]
+                    with patch.object(installer, 'stop') as stop, patch.object(installer, 'start') as start, patch.object(installer, 'replace_from_snapshot') as replace, patch.object(installer, 'snapshot', partial_snapshot if failure == 'snapshot' else real_snapshot), patch.object(Path, 'unlink', fail_unlink if failure == 'unlink' else real_unlink), patch.dict(installer.execute.__globals__, write=partial_marker if failure == 'partial-marker' else real_write):
+                        with self.assertRaisesRegex(OSError, 'injected'):
+                            installer.execute(files)
+                    stop.assert_called_once_with()
+                    start.assert_called_once_with()
+                    replace.assert_not_called()
+                    self.assertEqual(before, [module.tree_manifest(p) for p in
+                        [installer.app, installer.data / 'db', installer.data / 'bin']])
+                    if failure == 'partial-marker':
+                        self.assertEqual(installer.marker.read_bytes(), b'partial marker')
+                    if command == 'restore' and failure == 'unlink':
+                        self.assertEqual(installer.marker.read_bytes(), b'previous pending')
+
+    def test_recovery_failure_reports_original_and_recovery_errors(self):
+        from unittest.mock import patch
+        self.run_cli('install')
+        self.seed()
+        installer = self.installer()
+        files, _ = self.module().read_package(self.pkg, self.sha)
+        for mutated in [False, True]:
+            with self.subTest(mutated=mutated):
+                installer.marker.unlink(missing_ok=True)
+                failing = patch.object(installer, 'deploy', side_effect=OSError('candidate deploy failed')) if mutated else patch.object(installer, 'snapshot', side_effect=OSError('snapshot ENOSPC'))
+                with failing, patch.object(installer, 'stop'), patch.object(installer, 'start', side_effect=OSError('old service restart failed')):
+                    with self.assertRaisesRegex(ValueError, 'recovery failed:.*old service restart failed') as caught:
+                        installer.execute(files)
+                self.assertIn('candidate deploy failed' if mutated else 'snapshot ENOSPC', str(caught.exception))
+                self.assertIsInstance(caught.exception.__cause__, OSError)
+                if mutated:
+                    self.assertTrue(installer.marker.exists())
+                    self.assertTrue(list((installer.data / 'backups').iterdir()))
+
     def test_wal_snapshot_includes_committed_rows(self):
         self.run_cli('install')
         db = sqlite3.connect(self.data / 'db/x-ui.db')

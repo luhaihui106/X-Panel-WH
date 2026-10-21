@@ -27,6 +27,8 @@ python3 install/native.py install --package "$PACKAGE" --sha256 "$SHA256"
 
 已有程序、数据、日志、服务目的地均拒绝；发现已知 x-ui/3x-ui 安装也拒绝，不自动迁移或覆盖。RN-5 如果仍是历史 x-ui 路径，必须由后续已授权部署步骤停写、保护原实例并明确迁移，不能直接用本工具绕过保护。
 
+全新独立安装不提供 `/usr/bin/x-ui` 兼容脚本。继承的 Telegram“重启面板”和订阅转换安装仍可能依赖该脚本，在本安装路线当前不可用；本轮不实现兼容脚本。请在主机使用 `systemctl restart x-panel-wh.service` 重启面板，使用 `systemctl status/start/stop x-panel-wh.service` 查看或管理服务；这不替代订阅转换安装功能。
+
 包为严格白名单 x-panel-wh/ 根下常规文件：x-panel、bin/xray-linux-arm64、bin/{geoip,geosite}.dat、LICENSE、NOTICE、xray-LICENSE、xray-README.md、source.tar.gz、manifest.json。拒绝重复、缺失、额外、错误架构、链接、特殊文件和危险路径。外部 --sha256 必填；manifest 再逐文件校验。摘要检测损坏，不等同发布者签名。
 
 未来公开资产准备好后可用 `--url https://.../固定版本/固定资产.tar.gz --sha256 ...` 替代 --package。只接受显式 HTTPS，curl 开启证书/TLS 校验，重定向也只允许 HTTPS；不允许 latest、查询参数或 URL 凭据。这里没有可用的公开安装下载承诺。
