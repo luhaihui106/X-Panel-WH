@@ -180,7 +180,7 @@ class NativeTests(unittest.TestCase):
         args = ['--install-dir', '/opt/wh/app', '--data-dir', '/srv/wh/data', '--log-dir', '/srv/wh/log']
         self.run_cli('install', *args)
         unit = (self.root / 'etc/systemd/system/x-panel-wh.service').read_text()
-        for text in ['ExecStart=/opt/wh/app/x-panel', 'WorkingDirectory=/opt/wh/app',
+        for text in ['ExecStart=/opt/wh/app/x-panel', 'WorkingDirectory=/srv/wh/log',
                      'XUI_DB_FOLDER=/srv/wh/data/db', 'XUI_BIN_FOLDER=/srv/wh/data/bin',
                      'XUI_LOG_FOLDER=/srv/wh/log', 'ReadWritePaths=/srv/wh/data /srv/wh/log']:
             self.assertIn(text, unit)

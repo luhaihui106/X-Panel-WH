@@ -165,7 +165,7 @@ Wants=network.target
 Type=simple
 User=root
 UMask=0077
-WorkingDirectory={install}
+WorkingDirectory={log}
 ExecStart={install}/x-panel
 Environment="XUI_DB_FOLDER={data}/db"
 Environment="XUI_LOG_FOLDER={log}"

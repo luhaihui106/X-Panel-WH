@@ -20,7 +20,7 @@ python3 install/native.py install --package "$PACKAGE" --sha256 "$SHA256"
 - core /var/lib/x-panel-wh/bin/xray-linux-arm64 或 xray-linux-amd64（与包/主机一致）
 - 生成的 core 配置 /var/lib/x-panel-wh/bin/config.json
 - geoip.dat/geosite.dat 同 bin 目录
-- 日志 /var/log/x-panel-wh
+- 日志 /var/log/x-panel-wh；服务工作目录也使用该可写日志目录，使默认 core 模板的 ./access.log 与 ./error.log 不会写入只读程序目录。ExecStart、DB 与 core 均为绝对路径，不变更二进制。
 - 匹配恢复快照 /var/lib/x-panel-wh/backups/<随机ID>
 
 可显式设置 --install-dir、--data-dir、--log-dir，后续每次生命周期调用必须使用相同值；只允许互不重叠的绝对规范路径，不允许空格、systemd 转义或符号链接。目录创建使用 0700，服务 UMask=0077。服务沿用 root（core 低端口/网络能力），不偷偷创建账户；本工具不是非 root 运行改造。自定义 core 模板引用上述根以外的文件/证书/日志时，必须先人工核对 ProtectSystem/ProtectHome 和额外备份策略；不会自动收集外部秘密。
