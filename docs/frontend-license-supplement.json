@@ -1,0 +1,65 @@
+[
+  {
+    "component": "@ant-design/icons",
+    "path": "LICENSES/frontend/ant-design_icons.txt",
+    "sha256": "5d367fb0a07340571542eb4ee8eb1add62d37b71bad6786a57c2e9a86bf76c70",
+    "source": "https://raw.githubusercontent.com/ant-design/ant-design-icons/master/LICENSE",
+    "scope": "Full project MIT notice retrieved run82; not an assertion of exact runtime release. icons-vue shares the icons monorepo notice."
+  },
+  {
+    "component": "array-tree-filter",
+    "path": "LICENSES/frontend/array-tree-filter.txt",
+    "sha256": "ef0647d9e230deb32d3ee6e95e313a6bf59802bae462fa1516f22c420fdcd3b5",
+    "source": "https://raw.githubusercontent.com/afc163/array-tree-filter/master/LICENSE",
+    "scope": "Full project MIT notice retrieved run82; not an assertion of exact runtime release. icons-vue shares the icons monorepo notice."
+  },
+  {
+    "component": "component-indexof",
+    "path": "LICENSES/frontend/component-indexof.txt",
+    "sha256": "1c97b8d0e95c2d47c35a71d9465f06da3331f38046f554516fa10d71c5ed6a12",
+    "source": "https://raw.githubusercontent.com/component/indexof/master/LICENSE",
+    "scope": "Full project MIT notice retrieved run82; not an assertion of exact runtime release. icons-vue shares the icons monorepo notice."
+  },
+  {
+    "component": "omit.js",
+    "path": "LICENSES/frontend/omit.js.txt",
+    "sha256": "144e0b5a9c91c2efd65b2c05c00f9f8330c296ac0389365f389ca24958739549",
+    "source": "/root/.hermes/cache/scratch/xpanel-launch-20261021/distribution-run80/frontend/omit.js/unpacked/package/LICENSE",
+    "scope": "Full MIT notice from retained exact notice-input package; runtime release not asserted."
+  },
+  {
+    "component": "tinycolor2",
+    "path": "LICENSES/frontend/tinycolor2.txt",
+    "sha256": "c6cb470a9ba0a50d57611aeec1f31da609c5aefdbee8eac7f289bcb0e30625fa",
+    "source": "/root/.hermes/cache/scratch/xpanel-launch-20261021/distribution-run80/frontend/tinycolor2/unpacked/package/LICENSE",
+    "scope": "Full MIT notice from retained exact notice-input package; runtime release not asserted."
+  },
+  {
+    "component": "is-mobile",
+    "path": "LICENSES/frontend/is-mobile.txt",
+    "sha256": "a1bd5deadb6a06dd74efa852c1b8b23f63b67f2214fbe9c8bd591da51da69268",
+    "source": "/root/.hermes/cache/scratch/xpanel-launch-20261021/distribution-run80/frontend/is-mobile/unpacked/package/README.md",
+    "scope": "Verbatim README MIT section including original copyright spelling/HTML entities."
+  },
+  {
+    "component": "component-classes",
+    "path": "LICENSES/frontend/component-classes.txt",
+    "sha256": "23f406b3d0f946e2a4c685fd4c736118509aa5bbf17368d40ef51858a1734d74",
+    "source": "third_party/frontend-declarations/component-classes/package.json",
+    "scope": "Upstream MIT declaration preserved verbatim; standard full MIT terms supplemental; no fabricated copyright."
+  },
+  {
+    "component": "babel-helper-vue-jsx-merge-props",
+    "path": "LICENSES/frontend/babel-helper-vue-jsx-merge-props.txt",
+    "sha256": "0e456e5fd6b6871016d61da9904f8c02e573742992f3c63c6cde561839f247ed",
+    "source": "third_party/frontend-declarations/babel-helper-vue-jsx-merge-props/package.json",
+    "scope": "Upstream MIT declaration preserved verbatim; standard full MIT terms supplemental; no fabricated copyright."
+  },
+  {
+    "component": "dom-scroll-into-view",
+    "path": "LICENSES/frontend/dom-scroll-into-view.txt",
+    "sha256": "587b5eb52ba4515f2f8a8ca20aa0b7c33bb8e13498291fdcad741143dcacde4b",
+    "source": "third_party/frontend-declarations/dom-scroll-into-view/package.json",
+    "scope": "Upstream MIT declaration preserved verbatim; standard full MIT terms supplemental; no fabricated copyright."
+  }
+]

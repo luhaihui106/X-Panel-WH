@@ -4,4 +4,4 @@
 
 This language entry is navigation only, not a maintained full translation. The old upstream sales/affiliate and installation guide has been retired here. Use the maintained entries above for current main integration, build and release status. This is not an official Pro release; inherited upstream installers may overwrite downstream features.
 
-此语言文件仅作导航，不提供未经维护的完整翻译；原销售/推广与过时安装说明不再作为本派生版入口。功能与文档已集成 main，尚无正式发行包或公开派生一键下载/安装命令。
+此语言文件仅作导航；原销售/推广与过时安装说明已退役。请使用 [v26.9.13-wh.1 中文安装说明](docs/release-v26.9.13-wh.1.md)和配套完整发行材料，不执行继承的上游更新脚本。
