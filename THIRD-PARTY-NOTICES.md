@@ -4,7 +4,8 @@ This community derivative retains the root GPLv3 license and existing upstream
 copyrights. Third-party components retain their own licenses; font aggregation
 does not relicense the font as GPL. Full retrieved texts are in
 LICENSES/frontend/. docs/frontend-license-sources.json maps notice inputs to
-paths and hashes. A notice-input version is not an asserted runtime version.
+paths and hashes. docs/frontend-license-supplement.json records run82 additions.
+A notice-input version is not an asserted runtime version.
 
 Verified runtime identification:
 
@@ -15,8 +16,9 @@ Verified runtime identification:
   these modified bytes. Restored antd.min.js.LICENSE.txt retains the three
   original sidecar notices. Full ant-design-vue/Alipay, classnames and
   object-assign MIT texts are supplied separately. Additional observed
-  dependency notices are supplied, but exact modified-bundle dependency
-  coverage is not yet asserted complete.
+  dependency notices are supplied, including the run82 supplement described
+  below. Known dependency notice coverage is closed without claiming the
+  upstream source map reconstructs the modified bundle byte-for-byte.
 - axios: exact npm 1.11.0 dist/axios.min.js bytes; MIT, Matt Zabriskie and
   collaborators.
 - Vue: 2.7.16 header and parsed/minified code identity with npm 2.7.16
@@ -42,7 +44,10 @@ Verified runtime identification:
 - Moment: exact npm 2.30.1 min/moment.min.js, MIT, JS Foundation/contributors.
 - moment-jalali.min.js is a component-style moment-jalaali bundle registering
   jalaali-js and moment-jalaali, with inherited changes. Exact release version
-  is not established. Matching project MIT notices are retained; do not label
+  is not established and is not itself a missing MIT obligation. Full original
+  project copyright/permission/disclaimer notices for both included projects
+  are supplied. No version-conditioned license change was identified in the
+  retained release inputs. Matching project MIT notices are retained; do not label
   it exact 0.8.3 merely because that notice input is available. jalaali-js
   conversion implementation/exports are present; its separate MIT is supplied.
 - qs: exact cdnjs 6.5.2 qs.min.js, SHA-256
@@ -61,7 +66,9 @@ Verified runtime identification:
   Full OFL-1.1 and project copyright supplied. No font modification.
 - qrious2: see third_party/qrious2/README.md for exact fork, GPL and embedded
   Nevis MIT source notices. Readable fork and a working standalone minifier
-  are supplied; author-preferred modular source completeness remains OPEN.
+  are supplied. src/qrious2.js is the project's preferred editable source and
+  the actual build input; source delivery is closed on that maintenance basis,
+  not on an assertion about the author's unpublished modular workflow.
 
 AntD inherited source-map evidence identifies Babel runtime/helper, Ant Design
 icons/icons-vue/colors, omit.js, raf, warning, vue-ref, shallowequal, dom-align,
@@ -69,11 +76,28 @@ Lodash, core-js, resize-observer-polyfill, component-classes/indexof,
 array-tree-filter, process, async-validator, json2mq, enquire.js,
 add-dom-event-listener, is-mobile, shallow-equal, dom-closest, performance-now,
 object-assign, TinyColor, mutationobserver-shim, string-convert, dom-matches,
-and dom-scroll-into-view. Retrieved full notices are included only as supported
-by their actual source texts; missing full upstream texts/modified-module
-mapping for several components remain documented, not filled with invented
-copyrights or declared cleared. That upstream map is a bounded dependency
-lead, not proof the current modified bundle contains no other component.
+and dom-scroll-into-view. run82 supplements the original 39 notice files with
+nine files: Ant Design icons (also covering icons-vue in that monorepo),
+array-tree-filter, component-indexof, omit.js, TinyColor, is-mobile,
+component-classes, JSX merge helper and dom-scroll-into-view.
+
+For icons/array-tree-filter/indexof the full notice is retrieved from the same
+upstream project and its digest recorded; no exact runtime release equality
+is inferred from a current branch. omit.js/TinyColor/is-mobile full notices
+come from retained package LICENSE or README text. For component-classes,
+JSX helper and dom-scroll-into-view, the distributed upstream package actually
+supplies only an MIT declaration (and no copyright notice). Those exact
+package.json/available README declarations are preserved under
+third_party/frontend-declarations/. Their supplemental files explicitly
+identify the standard full MIT terms as supplemental, not a recovered
+copyright grant; no names/years are fabricated. There is no known omitted
+copyright line in those inputs that must be invented or newly authorized.
+
+Known FRONTEND-NOTICES obligations are CLOSED on this evidence and the
+upstream project licenses. This is not an exhaustive authorship/legal warranty.
+The upstream map remains a dependency lead, not proof the modified bundle
+contains no other component. Unchanged inherited GPL code does not need fresh
+per-file permission. No runtime library upgrade was made.
 
 Source URLs:
 
@@ -86,10 +110,13 @@ Source URLs:
 
 Packaging boundary:
 
-All original runtime bytes are unchanged. New sidecar/source/notices are not
-in the existing panel embedFS or frozen ARM64/AMD64 archives. Source-only
-notices must accompany any separately served old binary. Before public
-packaging, include this file, LICENSES, exact-fork source and their manifest;
-provide browser recipients the applicable notices. Merely adding a file to
-this repository does not retrofit an old binary's missing sidecar URL.
-No public-ready claim is made while FRONTEND-NOTICES coverage remains partial.
+All original frontend runtime bytes are unchanged. run81 rebuilt both binaries
+and verified that the restored AntD sidecar is actually served. Its fixed
+852359bb packages contain run80 materials but NOT the run82 supplement or new
+maintenance-source contract. A separately hashed matching source/material
+companion must accompany those fixed payloads; do not relabel their embedded
+source_commit or claim they contain later files. Include this file, LICENSES,
+both notice manifests, third_party/ and the root GPL license; provide browser
+recipients access to applicable notices/source. See docs/frontend-closure.md
+for exact readiness and delivery conditions. Public publication is separately
+unauthorized, not an outstanding version-number or modular-source defect.

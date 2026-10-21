@@ -1,5 +1,16 @@
 # Distribution material closure — task t_684fddfa / run 80
 
+Current disposition (task t_2802d57d / run82): the historical PARTIAL/OPEN
+entries below are superseded for the current local release set by
+[frontend-closure.md](frontend-closure.md) and the run81 licensed GeoData
+replacement. Known frontend notices and maintained corresponding-source
+materials are CLOSED; exact moment-jalaali version is unknown but its MIT
+notice obligation is satisfied. The run82 separately hashed source/material
+companion is required with fixed run81 payloads; no old package is relabelled.
+Public publication remains unauthorized, not a missing frontend material.
+The historical run80 observations below are retained as history, not current
+instructions to restart archaeology or replace QR runtime.
+
 Baseline: 6bd7f6a3b4f3379081b2bf324b87e1c04fec1c84. No runtime code,
 GeoData, installer or production service changes. No push, main, tag or Release.
 

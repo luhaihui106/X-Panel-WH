@@ -2,6 +2,18 @@
 
 本文件只描述本地候选，不承诺公开 Release、curl 一键入口或完整平台矩阵。
 
+当前状态更新（t_2802d57d / run82）：下文为 run79/80 历史验收记录，
+不再是当前候选身份。run81 已以 852359bb 重建两架构固定包并替换为
+明确许可的 DLC/DB-IP 数据，HTTP 署名及 AntD sidecar 已验证。
+run82 已补齐已知前端 notices，并将精确可读 qrious2 fork 落实为实际
+构建消耗的维护首选源码；6 项材料测试及 40 项绘图对比通过。
+当前发行集合必须是固定 run81 payload + run82 完整源码/材料 companion
++ run81 GeoData 输入源码归档 + 逐项哈希绑定清单，不能单发旧 payload
+或声称其内嵌源码已更新。具体 closed 依据和本地 ready 条件见
+[frontend-closure.md](frontend-closure.md)。精确 moment-jalaali 旧版本未知
+不构成已知 MIT 声明缺口；作者私有模块未找回不自动否定本项目已采用且
+真实可构建的可读维护源。无剩余前端技术/材料决策；公开发布仍未授权。
+
 ## 固定身份
 
 - 已验收 panel 原构建源码：`04b204ccb17d501946e5f5abfa9208e6072fe5e5`。

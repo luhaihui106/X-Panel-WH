@@ -30,7 +30,7 @@ function load(file) {
 }
 assert(process.env.QRIOUS_BUILD_OUTPUT, 'Set QRIOUS_BUILD_OUTPUT to the built scratch file');
 const files = [path.join(__dirname, '../../web/assets/qrcode/qrious2.min.js'),
-    path.join(__dirname, 'upstream/dist/qrious2.js'), process.env.QRIOUS_BUILD_OUTPUT];
+    path.join(__dirname, 'src/qrious2.js'), process.env.QRIOUS_BUILD_OUTPUT];
 const engines = files.map(load);
 let cases = 0;
 for (const value of ['', 'hello', '中文 العربية', 'vmess://' + 'a'.repeat(200), 'x'.repeat(1000)]) {
