@@ -1,78 +1,80 @@
-# X-Panel-WH 社区派生版
+# X-Panel-WH
 
-一个基于 Xray 的 Web 管理面板，用于管理代理入站、客户端和流量。基于 [xeefei/X-Panel](https://github.com/xeefei/X-Panel) 免费开源版本的小范围下游维护，保留原面板界面与主要功能；不是上游官方发行版或 Pro 产品，不提供商业授权绕过。
+基于 [xeefei/X-Panel](https://github.com/xeefei/X-Panel) 的 Xray 管理面板，管理代理入站、客户端和流量。
 
-[English](README.en.md) · [文档索引](docs/README.md) · [构建与安装](docs/build-install-upgrade.md) · [来源与许可证](docs/credits.md)
+[下载安装](docs/release-v26.9.13-wh.1.md) · [最新发行](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.1) · [English](README.en.md) · [文档](docs/README.md)
 
-## 本项目能做什么
+## 功能
 
-以下介绍以本仓库免费源码的实际路由、服务和前端为准，不将 Pro 提示或占位按钮当作已实现功能。
+- 管理 VLESS、VMess、Trojan、Shadowsocks 入站，配置传输及适用的 TLS/Reality 选项。
+- 为客户端分别设置流量额度、到期时间和启用状态，查看用量、在线状态与最近活动。
+- 生成连接链接、二维码和订阅，导入/导出入站 JSON 配置。
+- 查看系统资源、日志与 Xray 状态，停止或重启核心。
+- 下载/恢复面板数据库，导出 Xray 配置，配置 Telegram 通知与数据库备份发送。
 
-- **代理入站管理**：创建、编辑、启停和删除 VLESS、VMess、Trojan、Shadowsocks（SS）入站，配置端口、传输与 TLS/Reality 等适用选项；具体组合取决于协议和所用 Xray 核心。
-- **独立客户端管理**：为上述协议的客户端分别设置流量额度、到期时间和启用/禁用状态，支持添加、编辑、删除与手动重置流量；SS 多用户能力取决于加密方式。
-- **流量与活动查看**：查看入站和客户端上传/下载（Up/Down）、累计使用量（AllTime），以及在线客户端和最近活动时间。在线信息来自核心流量采集，不是精确的设备数或连接数保证。
-- **连接分享与配置迁移**：生成连接链接和二维码；启用订阅服务后提供客户端订阅链接及 JSON 订阅；支持入站配置 JSON 导入/导出，便于在兼容客户端中使用。
-- **系统与核心管理**：首页查看 CPU、内存、磁盘、网络和 Xray 状态，查看日志，停止/重启核心；通过面板设置和 Xray 配置页管理相应参数。
-- **本地备份与可选通知**：下载面板数据库、导入数据库恢复，导出 Xray 配置；保留用户自行配置的 Telegram 通知和数据库备份发送。需要自行配置 bot/接收人及网络，不代表全部 Telegram 菜单均可用。
+## 本版改动
 
-**不包含**：Pro 的主从/远程多服务器管理、远程备份/恢复、Telegram 一键配置等受限功能。界面中仍可能有这些入口或手动限制提示，本派生版没有解锁它们。
+- 客户端各自设置每月流量重置日（1–31 日），默认关闭；短月取月末，保留累计流量。
+- 删除首页自动推广和脚本广告。
+- 删除 Telegram 抽奖、美图等娱乐及推广入口，保留管理员操作和用户自行配置的通知；移除硬编码外报。
 
-## 相比上游的改动
+基于上游免费版，不包含 Pro 多服务器管理、远程备份等付费功能。
 
-- **每个客户端独立按月重置流量**：可分别开启并设置每月 **1–31 日**，**默认关闭**，按**面板时区**计算；短月自动取月末。只清零周期 Up/Down，**保留 AllTime**，不改额度和到期规则，不擅自启用手动禁用或已过期客户端。[详细语义与限制](docs/downstream-monthly-reset.md)
-- **去首页自动广告**：移除首页自动弹出的 Pro 欢迎推广，不影响正常导航；不承诺删除所有手动功能限制提示。[改动范围](docs/home-promotion-removal.md)
-- **管理员机器人清理**：移除抽奖、诗图新闻、VPS affiliate 和一键配置 Pro 购买占位；保留正常管理与用户配置的通知。定时报告改为一条真实本机运营摘要，不额外抓外部内容。[实际能力、通知与启用条件](docs/telegram-admin-bot.md)
-- **移除硬编码外报**：删除继承的第三方 Telegram 凭据及未经用户配置的外报路径，**保留用户自行配置的通知**。不代表历史凭据已撤销或完成全仓安全审计。
+## 安装与更新
+
+当前版本：[v26.9.13-wh.1](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.1)。提供 Linux amd64、arm64 安装包，需要 Python 3.10+、systemd、curl 和兼容的 libc。
+
+按[中文安装说明](docs/release-v26.9.13-wh.1.md#下载与核验)下载并校验文件后，在下载目录执行（amd64）：
+
+```sh
+sudo python3 native.py install --package "$PWD/x-panel-wh-852359bb-linux-amd64.tar.gz" --sha256 0f7568f2b9fdbedef52d273b658127b78783855f6ce3f2c7e14aa63ab8be278c
+```
+
+arm64 命令、下载步骤与更新/恢复方法见[安装说明](docs/release-v26.9.13-wh.1.md)。安装后不会自动启动或设置自启；先限制管理入口访问，再启动服务并修改初始账号密码。
+
+amd64 新装在 Ubuntu 24.04 上验证；arm64 安装包已验证运行，原生 systemd 新装流程尚未完整验证。其他发行版请先测试，详见[平台说明](docs/compatibility.md)。
 
 ## 界面预览
 
-以下为同版本完整面板的**隔离演示**，不是生产服务器截图。客户端均为 `example.net` 演示数据，流量保持 0；系统指标来自隔离运行主机的真实采集，未伪造遥测。截图保留 HTTP loopback 的 TLS 警告，生产访问应启用 HTTPS。[截图来源与脱敏说明](docs/screenshots/README.md)
+以下为隔离环境的演示截图，客户端使用示例数据。[截图说明](docs/screenshots/README.md)
+
+<details>
+<summary>查看仪表盘、客户端、月重置和手机布局</summary>
 
 ### 系统仪表盘
-
-查看系统资源、网络与 Xray 运行状态。
 
 ![系统仪表盘：隔离演示](docs/screenshots/dashboard.png)
 
 ### 入站与客户端列表
 
-展开入站即可查看独立客户端的启用状态、额度、用量与到期时间。
-
 ![入站与客户端列表：演示数据](docs/screenshots/clients.png)
 
 ### 每月流量重置设置
-
-从「入站列表」展开客户端并点击编辑图标，开启月重置，设置每月 **1–31 日**；按「面板设置」中的时区执行，短月取月末。图中为 **31 日**，UUID 等凭据字段已隐藏。
 
 ![客户端月重置编辑窗口：31 日](docs/screenshots/monthly-reset.png)
 
 ### 手机布局
 
-同一中文面板在 390 px 窄屏下的纵向布局；点击图片可查看长图。
-
 <a href="docs/screenshots/mobile.png"><img src="docs/screenshots/mobile.png" alt="手机布局：隔离演示长图" width="300"></a>
+
+</details>
 
 ## 如何使用客户端月重置
 
-1. 在「面板设置」确认时区（`timeLocation`）；建议明确设置为 `Asia/Shanghai` 等 IANA 时区。
-2. 在「入站列表」选择相应客户端，打开编辑窗口。
-3. 开启「每月流量重置」，填写每月重置日（1–31），保存。各客户端可设置不同日期；不需要的客户端保持关闭。
-4. 从下一周期开始，在指定日期的面板时区零点到达后，由核心流量任务执行；例如设置 31 日，二月取该月最后一天。刚开启或改日期不会立即补做旧周期；核心停止/不可达时会等待恢复。
+1. 在「面板设置」确认时区，例如 `Asia/Shanghai`。
+2. 在「入站列表」展开客户端，打开编辑窗口。
+3. 开启「每月流量重置」，填写重置日（1–31）并保存。每个客户端可设不同日期。
 
-额度与到期时间仍分别生效，月重置不延长有效期。字段/API 兼容性、停机恢复与计费安全边界见[月重置说明](docs/downstream-monthly-reset.md)。
+从下一周期开始，流量任务在指定日期零点后执行；31 日遇短月取月末。刚开启或改日期不会补做旧周期，核心停止时等待恢复。
 
-## 获取与安装
+月重置只清零周期上传/下载用量，保留累计流量，不延长有效期，也不会启用手动禁用或已过期客户端。[详细说明](docs/downstream-monthly-reset.md)
 
-首个完整发行版 **[v26.9.13-wh.1](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.1)** 提供固定 Linux AMD64/ARM64 载荷、真实 Python 安装器、完整源码/许可材料、GeoData 输入和 SHA256SUMS。[中文下载安装、更新与恢复](docs/release-v26.9.13-wh.1.md)。没有 `curl | bash` 一键入口；先下载、核验，再显式执行安装器。
+## 常见问题
 
-AMD64 已在 Ubuntu 24.04/systemd 255 做隔离新装完整 core 与停启验证；ARM64 有固定包运行验收，但没有等价原生新装 systemd 验收。不承诺所有发行版或 Docker/Windows。默认安装不启动、不自启，首次登录前限制访问并及时修改默认凭据；已有 x-ui/3x-ui 默认拒绝，不能当作无损迁移工具。
+- 已有 x-ui/3x-ui 能直接覆盖吗？不能。安装器会拒绝已有安装，迁移前须备份并单独验证。
+- 能用上游脚本更新吗？不要执行仓库继承的 `install.sh`、`x-ui.sh` 更新，会转向上游并覆盖本版功能。请用配套 `native.py`，见[更新与恢复](docs/release-v26.9.13-wh.1.md#更新与匹配恢复)。
+- 有 Docker 镜像吗？目前没有本项目的 Docker 发行版。
 
-载荷构建源码为 `852359bb`，必须搭配 `10829d28` 完整源码/许可 companion 和 GeoData 输入源码；tag 还包含后续发行说明，不冒称重新构建。[第三方声明](THIRD-PARTY-NOTICES.md)及[源码材料公开下载](https://github.com/luhaihui106/X-Panel-WH/releases/download/v26.9.13-wh.1/x-panel-wh-source-materials-10829d28.tar.gz)也应提供给浏览器接收者。
+## 许可与致谢
 
-仓库继承的 `install.sh`、`x-ui.sh` 仍包含上游下载/更新和 Pro 分流，**不要将它们当作保留本派生功能的生产升级入口**。升级前备份一致的数据库、配置和程序，先隔离验证；回滚应恢复匹配的旧程序与数据库快照。[安装、升级与回滚](docs/build-install-upgrade.md) · [平台验证与兼容性](docs/compatibility.md)
-
-## 安全与来源
-
-流量计数不是跨 Xray/SQLite 的原子事务，崩溃窗口可能丢失未持久化增量；未知流量身份可能阻塞采集/重置，核心恢复也可能失败。[限制与维护边界](docs/compatibility.md) · [身份归档设计](docs/traffic-identity-retirement.md)。不要上传生产数据库、凭据、订阅链接或机器信息。
-
-遵循 [GPL v3](LICENSE)，保留上游版权及来源；X-UI、3X-UI、X-Panel 和第三方数据/组件的贡献与许可见[致谢](docs/credits.md)。不宣称原创或拥有第三方组件全部权利。维护流程、候选提交与发布边界见[维护说明](docs/build-install-upgrade.md#维护与发行状态)。
+遵循 [GPL v3](LICENSE)，感谢 [xeefei/X-Panel 及上游项目](docs/credits.md)。再分发请保留配套源码和许可声明；部署时也请向浏览器用户提供[第三方声明](THIRD-PARTY-NOTICES.md)与[源码材料链接](docs/release-v26.9.13-wh.1.md#给浏览器用户提供声明与源码)。[GeoData 来源](docs/geodata.md) · [前端源码与许可](docs/frontend-closure.md)
