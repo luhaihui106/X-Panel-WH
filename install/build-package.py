@@ -73,8 +73,8 @@ def verified_geodata(directory, lock=None):
     return result
 
 XRAY_SHA256 = {
-    'arm64': '4d30283ae614e3057f730f67cd088a42be6fdf91f8639d82cb69e48cde80413c',
-    'amd64': '23cd9af937744d97776ee35ecad4972cf4b2109d1e0fe6be9930467608f7c8ae',
+    'arm64': '89cfe01674d7c9f6847b7dd9389537be9acb3b9dc3c6cb9fdeba87a3e4e57fc1',
+    'amd64': 'aa11c3685c71da0ffc71e511db50404609e7e963bb914b048f59a6a00af8930e',
 }
 
 
@@ -115,17 +115,19 @@ def main():
     # Explicit tracked source only; .hermes/summary.json/runtime data cannot enter.
     files['source.tar.gz'] = subprocess.check_output(
         ['git', 'archive', '--format=tar.gz', '--prefix=X-Panel-WH/', head], cwd=repo)
-    files['NOTICE'] = (f'''X-Panel-WH local candidate {args.version}
+    files['NOTICE'] = (f'''X-Panel-WH distribution {args.version}
 Community derivative of xeefei/X-Panel. Preserve inherited copyright and GPL license.
 Source commit: {head}
 Corresponding panel source is included in source.tar.gz.
 Panel SHA256: {args.panel_sha256}
-Xray-core v26.3.27, MPL-2.0: https://github.com/XTLS/Xray-core/tree/v26.3.27
+Xray-core v26.7.11, MPL-2.0: https://github.com/XTLS/Xray-core/tree/50231eaff98ccc31b5cbd247a721c16e97fe5ec1
+Contains GHSA-5wf9-h793-w73c fix 64fada32b5b9e6ae064a038fa0e4e2b766499bd5.
+Exact Xray source and upstream build recipe must accompany release materials.
 Xray ZIP SHA256: {XRAY_SHA256[args.arch]}
 Original Xray LICENSE and README included. Historical ZIP data are NOT included.
 GeoData are pinned independently by docs/geodata-lock.json; complete attribution follows.
-This is a private test candidate, NOT a public Release or a redistribution-rights verdict.
-Third-party frontend/data redistribution and final notices need scoped release review.
+Release identity and acceptance evidence are supplied in delivery-binding.json.
+Retain complete corresponding source, dependency licenses and independent GeoData inputs.
 Panel target: linux/{args.arch}. Reused verified executable, not compiled by this packager.
 Panel build revision/toolchain may differ from package source commit; consult delivery evidence.
 No claim of static linking, cross-distro compatibility, browser or core traffic acceptance.

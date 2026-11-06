@@ -62,7 +62,7 @@ python3 install/native.py install --root /已有/scratch/synthetic-root --packag
 
 ## 生成私人候选
 
-`build-package.py` 接受已记录摘要的 ARM64/AMD64 面板，以及对应架构固定 Xray v26.3.27 原始 ZIP（各自内置 ZIP 摘要锁）；不执行面板/core。--arch 默认 arm64，AMD64 必须显式 --arch amd64，ZIP 为 Xray-linux-64.zip。对应源码用 Git 受跟踪提交归档，排除 .hermes、summary.json、DB、日志和本地证据。必须从已提交且与已验收面板运行时源码一致的提交打包；仅安装器/文档变更可复用已验收 binary，但必须在交付记录注明 binary 原构建提交、工具链、CGO、vcs.modified 与包源码提交之差，不冒称重新构建。打包器不声称仅凭调用者提供的摘要即可证明构建来源。
+`build-package.py` 接受已记录摘要的 ARM64/AMD64 面板，以及对应架构固定 Xray v26.7.11 原始 ZIP（各自内置 ZIP 摘要锁；精确源码 `50231eaff98ccc31b5cbd247a721c16e97fe5ec1`，包含 GHSA-5wf9-h793-w73c 修复；ARM64 为 Xray-linux-arm64-v8a.zip）；不执行面板/core。--arch 默认 arm64，AMD64 必须显式 --arch amd64，ZIP 为 Xray-linux-64.zip。对应源码用 Git 受跟踪提交归档，排除 .hermes、summary.json、DB、日志和本地证据。必须从已提交且与已验收面板运行时源码一致的提交打包；仅安装器/文档变更可复用已验收 binary，但必须在交付记录注明 binary 原构建提交、工具链、CGO、vcs.modified 与包源码提交之差，不冒称重新构建。打包器不声称仅凭调用者提供的摘要即可证明构建来源。
 
 ```sh
 python3 -B install/build-package.py --panel /已验收/panel --panel-sha256 完整摘要 --xray-zip /固定/Xray-linux-arm64-v8a.zip --version 本地固定版本 --output /scratch/固定资产.tar.gz

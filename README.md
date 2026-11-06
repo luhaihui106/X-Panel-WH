@@ -4,6 +4,8 @@
 
 [下载安装](docs/release-v26.9.13-wh.1.md) · [最新发行](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.1) · [English](README.en.md) · [文档](docs/README.md)
 
+安全更新候选：[v26.9.13-wh.2](docs/release-v26.9.13-wh.2.md)（尚未发布，勿将旧包视为安全修复；正式切换以新版本完整资产及摘要为准）。
+
 ## 功能
 
 - 管理 VLESS、VMess、Trojan、Shadowsocks 入站，配置传输及适用的 TLS/Reality 选项。
