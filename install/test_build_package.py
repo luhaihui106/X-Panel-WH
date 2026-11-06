@@ -15,6 +15,16 @@ from test_native import elf
 
 
 class BuildPackageTests(unittest.TestCase):
+    def test_fixed_official_xray_lock(self):
+        spec = importlib.util.spec_from_file_location('builder_lock', Path(__file__).with_name('build-package.py'))
+        assert spec is not None and spec.loader is not None
+        builder = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(builder)
+        self.assertEqual(builder.XRAY_SHA256, {
+            'amd64': 'aa11c3685c71da0ffc71e511db50404609e7e963bb914b048f59a6a00af8930e',
+            'arm64': '89cfe01674d7c9f6847b7dd9389537be9acb3b9dc3c6cb9fdeba87a3e4e57fc1',
+        })
+
     def test_amd64_builder_and_mismatched_core(self):
         spec = importlib.util.spec_from_file_location('builder', Path(__file__).with_name('build-package.py'))
         assert spec is not None and spec.loader is not None
@@ -53,6 +63,8 @@ class BuildPackageTests(unittest.TestCase):
                             self.assertEqual(files['bin/geoip.dat'], b'licensed ip')
                             self.assertEqual(files['bin/geosite.dat'], b'licensed site')
                             self.assertIn(b'licensed fixture', files['NOTICE'])
+                            self.assertIn(b'Xray-core v26.7.11', files['NOTICE'])
+                            self.assertIn(b'50231eaff98ccc31b5cbd247a721c16e97fe5ec1', files['NOTICE'])
                         else:
                             with self.assertRaises(ValueError):
                                 builder.main()

@@ -1,5 +1,7 @@
 # v26.9.13-wh.1 安装、更新与恢复
 
+> **安装包已退役**：请使用 [wh.2 安全更新](release-v26.9.13-wh.2.md)。仅撤下旧版两个安装包，旧 tag、源码/许可 companion、GeoData 与历史摘要保留。下文是旧版身份与验收记录，不表示旧二进制已修复。
+
 [正式发行及完整资产](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.1) · [源码](https://github.com/luhaihui106/X-Panel-WH/tree/v26.9.13-wh.1) · [第三方声明](https://github.com/luhaihui106/X-Panel-WH/blob/v26.9.13-wh.1/THIRD-PARTY-NOTICES.md)
 
 ## 版本与支持范围

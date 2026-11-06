@@ -2,7 +2,9 @@
 
 基于 [xeefei/X-Panel](https://github.com/xeefei/X-Panel) 的 Xray 管理面板，管理代理入站、客户端和流量。
 
-[下载安装](docs/release-v26.9.13-wh.1.md) · [最新发行](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.1) · [English](README.en.md) · [文档](docs/README.md)
+[下载安装](docs/release-v26.9.13-wh.2.md) · [最新发行](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.2) · [English](README.en.md) · [文档](docs/README.md)
+
+安全更新：面板与独立核心均包含 CA pinning 修复；glibc >= 2.34，REALITY 默认最低客户端 26.3.27。
 
 ## 功能
 
@@ -22,17 +24,17 @@
 
 ## 安装与更新
 
-当前版本：[v26.9.13-wh.1](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.1)。提供 Linux amd64、arm64 安装包，需要 Python 3.10+、systemd、curl 和兼容的 libc。
+当前版本：[v26.9.13-wh.2](https://github.com/luhaihui106/X-Panel-WH/releases/tag/v26.9.13-wh.2)。提供 Linux amd64、arm64 安装包，需要 Python 3.10+、systemd、curl 和兼容的 libc。
 
-按[中文安装说明](docs/release-v26.9.13-wh.1.md#下载与核验)下载并校验文件后，在下载目录执行（amd64）：
+按[中文安装说明](docs/release-v26.9.13-wh.2.md#下载与核验)下载并校验文件后，在下载目录执行（amd64）：
 
 ```sh
-sudo python3 native.py install --package "$PWD/x-panel-wh-852359bb-linux-amd64.tar.gz" --sha256 0f7568f2b9fdbedef52d273b658127b78783855f6ce3f2c7e14aa63ab8be278c
+sudo python3 native.py install --package "$PWD/x-panel-wh-e6509c98-linux-amd64.tar.gz" --sha256 972eaad9783dea5ff4cc4d991a2d20aa0cc868967ffcf6c6be3c9eca211069f3
 ```
 
-arm64 命令、下载步骤与更新/恢复方法见[安装说明](docs/release-v26.9.13-wh.1.md)。安装后不会自动启动或设置自启；先限制管理入口访问，再启动服务并修改初始账号密码。
+arm64 命令、下载步骤与更新/恢复方法见[安装说明](docs/release-v26.9.13-wh.2.md)。安装后不会自动启动或设置自启；先限制管理入口访问，再启动服务并修改初始账号密码。
 
-amd64 新装在 Ubuntu 24.04 上验证；arm64 安装包已验证运行，原生 systemd 新装流程尚未完整验证。其他发行版请先测试，详见[平台说明](docs/compatibility.md)。
+wh.2 双架构版本与离线安装/更新/恢复已验收；ARM64 核心 TLS 与隔离面板 HTTP/SQLite 停启已验证。AMD64 QEMU 核心 TLS 受 Go runtime 崩溃限制，未宣称原生 systemd/全发行版验收。需 **glibc >= 2.34**；具体边界见发行说明。
 
 ## 界面预览
 
@@ -72,9 +74,9 @@ amd64 新装在 Ubuntu 24.04 上验证；arm64 安装包已验证运行，原生
 ## 常见问题
 
 - 已有 x-ui/3x-ui 能直接覆盖吗？不能。安装器会拒绝已有安装，迁移前须备份并单独验证。
-- 能用上游脚本更新吗？不要执行仓库继承的 `install.sh`、`x-ui.sh` 更新，会转向上游并覆盖本版功能。请用配套 `native.py`，见[更新与恢复](docs/release-v26.9.13-wh.1.md#更新与匹配恢复)。
+- 能用上游脚本更新吗？不要执行仓库继承的 `install.sh`、`x-ui.sh` 更新，会转向上游并覆盖本版功能。请用配套 `native.py`，见[更新与恢复](docs/release-v26.9.13-wh.2.md#安装与更新)。
 - 有 Docker 镜像吗？目前没有本项目的 Docker 发行版。
 
 ## 许可与致谢
 
-遵循 [GPL v3](LICENSE)，感谢 [xeefei/X-Panel 及上游项目](docs/credits.md)。再分发请保留配套源码和许可声明；部署时也请向浏览器用户提供[第三方声明](THIRD-PARTY-NOTICES.md)与[源码材料链接](docs/release-v26.9.13-wh.1.md#给浏览器用户提供声明与源码)。[GeoData 来源](docs/geodata.md) · [前端源码与许可](docs/frontend-closure.md)
+遵循 [GPL v3](LICENSE)，感谢 [xeefei/X-Panel 及上游项目](docs/credits.md)。再分发请保留配套源码和许可声明；部署时也请向浏览器用户提供[第三方声明](THIRD-PARTY-NOTICES.md)与[源码材料链接](docs/release-v26.9.13-wh.2.md#许可与源码)。[GeoData 来源](docs/geodata.md) · [前端源码与许可](docs/frontend-closure.md)
